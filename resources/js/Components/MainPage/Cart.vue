@@ -51,7 +51,10 @@ export default {
             });
         },
         deleteKnive(id) {
-            alert(id);
+            axios.post('/api/cart/remove', {'id' : id}).then(response => {
+                console.log(response.data.message);
+                this.getCart();
+            });
         }
     },
     computed: {

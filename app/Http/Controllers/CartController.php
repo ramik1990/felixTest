@@ -39,4 +39,11 @@ class CartController extends Controller
         $cart = Cart::where('session_id', session()->getId())->where('is_paid', 0)->with('knives')->first();
         return $cart;
     }
+
+    //Удалить из корзины нож
+    public function removeFromCart(Request $request) {
+        $cart = Cart::where('is_paid', 0)->where('session_id', session()->getId())->first();
+        $cart->knives()->detach($request->id);
+        return response()->json(['message' => 'Нож удален из корзины']);
+    }
 }
