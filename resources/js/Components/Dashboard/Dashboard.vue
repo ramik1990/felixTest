@@ -1,16 +1,20 @@
 <template>
-    <div>
+    <div style="text-align: center;">
         <h2>Личный кабинет</h2>
         <p v-if="user">Добро пожаловать, {{ user.name }}</p>
-        <button @click="logout">Выйти</button>
     </div>
+    <knife-form />
 </template>
 
 <script>
 import axios from 'axios';
+import AddKnifeForm from '../Knifes/AddKnifeForm.vue';
 
 export default {
     name: "Dashboard",
+    components: {
+        'knife-form' : AddKnifeForm
+    },
     data() {
         return {
             user: null

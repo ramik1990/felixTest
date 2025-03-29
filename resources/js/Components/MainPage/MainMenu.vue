@@ -10,11 +10,17 @@
                 <router-link class="nav-link" :class="{ active: isActive('/about') }" to="/about">О нас</router-link>
               </li>
               <li class="nav-item">
+                <router-link class="nav-link" :class="{ active: isActive('/knifes') }" to="/knifes">Ножи</router-link>
+              </li>
+              <li class="nav-item">
                 <router-link class="nav-link" :class="{ active: isActive('/dashboard') }" to="/dashboard">Личный кабинет</router-link>
               </li>
-              <li class="nav-item" v-if="!token" style="display: flex;">
+              <li class="nav-item" v-if="!token" style="display: flex; position:absolute; right:0;">
                 <router-link class="nav-link" :class="{ active: isActive('/login') }" to="/login">Войти</router-link>
                 <router-link class="nav-link" :class="{ active: isActive('/login') }" to="/register">Регистрация</router-link>
+              </li>
+              <li class="nav-item" v-if="token">
+                <a class="nav-link" style="display: flex; position:absolute; right:0;" @click.prevent="logout" :class="{ active: isActive('/dashboard') }" href="#">Выход</a>
               </li>
             </ul>
           </div>
@@ -23,6 +29,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "MainMenu",
     data() {
@@ -45,6 +53,14 @@ export default {
             } else {
                 this.token = '';
             }
+        },
+        async logout() {
+          const response = await axios.post('/api/logout', null, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          });
+          localStorage.removeItem('token');
+          console.log(response.data.message);
+          this.$router.push('/');
         }
     },
     mounted() {
