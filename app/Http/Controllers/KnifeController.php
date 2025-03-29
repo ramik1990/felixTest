@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class KnifeController extends Controller
 {
-    protected $table = 'knives';
-    protected $guarded = [];
+
 
     public function uploadKnife(Request $request) {
         
@@ -23,6 +22,21 @@ class KnifeController extends Controller
             $knife->imageUrl = $path;
         }
         $knife->save();
-        return response()->json(['message' => 'Нож добавлен!', 'knife' => $knife, 'imageUrl' => public_path('storage/'.$path)], 201);
+        return response()->json(['message' => 'Нож добавлен!', 'knife' => $knife], 201);
+    }
+
+    public function getKnives(Request $request) {
+        $knives = Knife::select('id', 'title', 'description', 'price', 'imageUrl', 'created_at')
+        ->orderBy('created_at', 'desc') 
+        ->paginate(10); 
+        // Форматируем путь к изображению
+        $knives->getCollection()->transform(function ($knife) {
+            if ($knife->imageUrl) {
+                $knife->imageUrl = asset('storage/' . $knife->imageUrl);
+            }
+            return $knife;
+        });
+
+        return response()->json($knives);
     }
 }

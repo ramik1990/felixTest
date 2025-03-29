@@ -13,11 +13,14 @@
                 <router-link class="nav-link" :class="{ active: isActive('/knifes') }" to="/knifes">Ножи</router-link>
               </li>
               <li class="nav-item">
+                <router-link class="nav-link" :class="{ active: isActive('/cart') }" to="/cart">Корзина</router-link>
+              </li>
+              <li class="nav-item">
                 <router-link class="nav-link" :class="{ active: isActive('/dashboard') }" to="/dashboard">Личный кабинет</router-link>
               </li>
               <li class="nav-item" v-if="!token" style="display: flex; position:absolute; right:0;">
                 <router-link class="nav-link" :class="{ active: isActive('/login') }" to="/login">Войти</router-link>
-                <router-link class="nav-link" :class="{ active: isActive('/login') }" to="/register">Регистрация</router-link>
+                <router-link class="nav-link" :class="{ active: isActive('/register') }" to="/register">Регистрация</router-link>
               </li>
               <li class="nav-item" v-if="token">
                 <a class="nav-link" style="display: flex; position:absolute; right:0;" @click.prevent="logout" :class="{ active: isActive('/dashboard') }" href="#">Выход</a>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KnifeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 
 
 /*
@@ -24,3 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 Route::post('/uploadKnife', [KnifeController::class, 'uploadKnife']);
+Route::post('/getKnives', [KnifeController::class, 'getKnives']);
+
+Route::get('/cart', [CartController::class, 'getCart']);
+Route::post('/cart/add', [CartController::class, 'addToCart']);
+Route::post('/cart/remove', [CartController::class, 'removeFromCart']);

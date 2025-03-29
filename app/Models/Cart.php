@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Knife extends Model
+class Cart extends Model
 {
     use HasFactory;
-    protected $table = 'knives';
+
+    protected $table = 'carts';
     protected $guarded = [];
 
-    public function carts() {
-        return $this->belongsToMany(Cart::class, 'cart_knife')->withPivot('quantity');
+    public function knives() {
+        return $this->belongsToMany(Knife::class, 'cart_knife')->withPivot('quantity');
     }
 }

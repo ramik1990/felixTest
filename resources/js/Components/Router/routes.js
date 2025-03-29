@@ -4,6 +4,7 @@ import Dashboard from "../Dashboard/Dashboard.vue";
 import Register from "../Auth/Register.vue";
 import Login from "../Auth/Login.vue";
 import KnifePage from "../MainPage/KnifePage.vue";
+import Cart from "../MainPage/Cart.vue";
 
 const routes = [
     {
@@ -30,6 +31,10 @@ const routes = [
     {
         path: '/knifes',
         component: KnifePage
+    },
+    {
+        path: '/cart',
+        component: Cart
     }
 ];
 

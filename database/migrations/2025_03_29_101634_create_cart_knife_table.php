@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('knives', function (Blueprint $table) {
+        Schema::create('cart_knife', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->integer('price');
-            $table->string('imageUrl');
+            $table->string('session_id');
+            $table->foreignIdFor(App\Models\Cart::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(App\Models\Knife::class)->constrained()->onDelete('cascade');
+            $table->integer('quantity')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('knives');
+        Schema::dropIfExists('cart_knife');
     }
 };
