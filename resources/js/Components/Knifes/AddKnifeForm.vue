@@ -10,6 +10,10 @@
                 <textarea class="form-control" placeholder="Описание ножа" v-model="knife.description" id="aboutKnife" style="height: 150px" required></textarea>
                 <label for="aboutKnife">Описание ножа</label>
             </div>
+            <div class="form-floating w-50 mx-auto">
+                <input class="form-control form-control-m" id="knifePrice" type="number" placeholder="Стоимость ножа" v-model="knife.price" required>
+                <label for="knifePrice">Стоимость</label>
+            </div>
             <div class="mb-3 w-50">
                 <label for="image" class="form-label">Загрузите изображение</label>
                 <input class="form-control" type="file" id="image" accept="image/*" @change="handleFileUpload" required>
@@ -29,6 +33,7 @@ export default {
             knife: {
                 title: '',
                 description: '',
+                price: '',
                 selectedFile: null
             }
         }
@@ -44,6 +49,7 @@ export default {
             let formData = new FormData();
             formData.append('title', this.knife.title);
             formData.append('description', this.knife.description);
+            formData.append('price', this.knife.price);
             formData.append('file', this.knife.selectedFile);
             axios.post('/api/uploadKnife', formData, {
                 headers: {

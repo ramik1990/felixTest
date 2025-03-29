@@ -17,6 +17,7 @@ class KnifeController extends Controller
         $knife = new Knife();
         $knife->title = $request->title;
         $knife->description = $request->description;
+        $knife->price = $request->price;
         if($request->hasFile('file')) {
             $path = $request->file('file')->store('knifes', 'public');
             $knife->imageUrl = $path;
