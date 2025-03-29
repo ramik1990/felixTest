@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     name: "AddKnifeForm",
@@ -39,8 +40,18 @@ export default {
                 this.knife.selectedFile = file;
             }
         },
-        submitForm() {
-            
+        submitForm() {      // отправляем данные по ножу на сервер для добавления
+            let formData = new FormData();
+            formData.append('title', this.knife.title);
+            formData.append('description', this.knife.description);
+            formData.append('file', this.knife.selectedFile);
+            axios.post('/api/uploadKnife', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                console.log(response.data.message);
+            });
         }
     },
 }
