@@ -59,11 +59,13 @@ export default {
     },
     computed: {
         summ() {
-            let s = 0;
-            this.knives.forEach(element => {
-                s = element.price * element.pivot.quantity + s;
-            }); 
-            return s;
+            if(this.knives) {
+                let s = 0;
+                this.knives.forEach(element => {
+                    s = element.price * element.pivot.quantity + s;
+                }); 
+                return s;
+            }
         }
     },
     created() {
